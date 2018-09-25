@@ -1,4 +1,4 @@
-<?php namespace Responsiv\Money\FormWidgets;
+<?php namespace Initbiz\Money\FormWidgets;
 
 use Html;
 use Backend\Classes\FormField;
@@ -19,7 +19,7 @@ class Money extends FormWidgetBase
     /**
      * {@inheritDoc}
      */
-    public $defaultAlias = 'currency';
+    public $defaultAlias = 'money';
 
     /**
      * {@inheritDoc}
@@ -46,13 +46,30 @@ class Money extends FormWidgetBase
      */
     public function prepareVars()
     {
-        $currencyObj = CurrencyModel::getPrimary();
-        $this->vars['name'] = $this->formField->getName();
-        $this->vars['value'] = $this->getLoadValue();
-        $this->vars['field'] = $this->formField;
+        $primaryCurrency = CurrencyModel::getPrimary();
+
+        $value = $this->getLoadValue();
+
+        if ($value) {
+            $amount = $this->getLoadValue()->amount;
+            $currencyCode = $this->getLoadValue()->currency;
+        } else {
+            $amount = 0;
+            $currencyCode = $primaryCurrency->currency_code;
+        }
+
+        $name = $this->formField->getName()."[amount]";
+        $currenciesFieldName = $this->formField->getName()."[currency]";
+
+        $currenciesField = new FormField($currenciesFieldName, $this->label."_currency");
+        $currenciesField->options = CurrencyModel::listEnabled();
+        $currenciesField->value = $currencyCode;
+
+        $this->vars['name'] = $name;
         $this->vars['format'] = $this->format;
-        $this->vars['symbol'] = $currencyObj ? $currencyObj->currency_symbol : '$';
-        $this->vars['symbolBefore'] = $currencyObj ? $currencyObj->place_symbol_before : true;
+        $this->vars['amount'] = $amount;
+        $this->vars['primaryCurrency'] = $primaryCurrency;
+        $this->vars['currenciesField'] = $currenciesField;
     }
 
     /**
@@ -62,10 +79,6 @@ class Money extends FormWidgetBase
     {
         if ($this->formField->disabled || $this->formField->hidden) {
             return FormField::NO_SAVE_DATA;
-        }
-
-        if (!strlen($value)) {
-            return null;
         }
 
         return $value;

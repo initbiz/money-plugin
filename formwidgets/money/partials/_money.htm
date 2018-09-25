@@ -1,23 +1,19 @@
+<!-- Money field -->
 <?php if ($this->previewMode): ?>
     <div class="form-control"><?= e(Currency::format($value, ['format' => $format])) ?></div>
 <?php else: ?>
     <div
         id="<?= $this->getId() ?>"
-        class="input-group">
-        <?php if ($symbolBefore): ?>
-            <span class="input-group-addon"><?= e($symbol) ?></span>
-        <?php endif ?>
+        class="input-group number-field">
         <input
             name="<?= $name ?>"
             id="<?= $this->getId('textarea') ?>"
-            value="<?= e($value) ?>"
-            placeholder="<?= e(trans($field->placeholder)) ?>"
+            value="<?= e($amount) ?>"
             class="form-control"
             autocomplete="off"
-            <?= $field->getAttributes() ?>
+            style="width: 70%; text-align:right;"
             />
-        <?php if (!$symbolBefore): ?>
-            <span class="input-group-addon"><?= e($symbol) ?></span>
-        <?php endif ?>
+
+        <?= $this->makePartial('dropdown', ['field' => $currenciesField]) ?>
     </div>
 <?php endif ?>

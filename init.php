@@ -15,5 +15,15 @@ Currencies::extendFormFields(function ($widget) {
 
     $configFile = __DIR__ . '/config/extend_currencies_form.yaml';
     $config = Yaml::parse(File::get($configFile));
-    $widget->addTabFields($config);
+    $widget->addFields($config);
+});
+
+Currency::extend(function ($model) {
+    //By default 2 fraction digits
+    $model->addDynamicMethod('getFractionDigitsAttribute', function ($value) use ($model) {
+        if ($value === null) {
+            return 2;
+        }
+        return $value;
+    });
 });

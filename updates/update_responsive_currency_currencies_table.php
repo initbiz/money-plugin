@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class UpdateResponsiveCurrenciesTable extends Migration
+class UpdateResponsiveCurrencyCurrenciesTable extends Migration
 {
     public function up()
     {
