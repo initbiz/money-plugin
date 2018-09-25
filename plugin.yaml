@@ -1,0 +1,5 @@
+plugin:
+    name: 'initbiz.cumulussubscriptions::lang.plugin.name'
+    description: 'initbiz.cumulussubscriptions::lang.plugin.description'
+    author: Initbiz
+    icon: oc-icon-money

@@ -1,0 +1,58 @@
+# ===================================
+#  Extended Profile Field Definitions
+# ===================================
+
+is_expiring:
+    label: "initbiz.cumulussubscriptions::lang.plan_subscription.is_expiring"
+    tab: "initbiz.cumulussubscriptions::lang.plan_subscription.tab_label"
+    type: switch
+expiring_section:
+    label: "initbiz.cumulussubscriptions::lang.plan_subscription.expiring_section"
+    tab: "initbiz.cumulussubscriptions::lang.plan_subscription.tab_label"
+    type: section
+    trigger:
+        action: show
+        field: is_expiring
+        condition: checked
+expiring_count:
+    tab: "initbiz.cumulussubscriptions::lang.plan_subscription.tab_label"
+    span: left
+    type: number
+    trigger:
+        action: show
+        field: is_expiring
+        condition: checked
+expiring_period:
+    tab: "initbiz.cumulussubscriptions::lang.plan_subscription.tab_label"
+    type: dropdown
+    span: right
+    options:
+        days: "initbiz.cumulussubscriptions::lang.plan_subscription.expiring_period_days"
+        months: "initbiz.cumulussubscriptions::lang.plan_subscription.expiring_period_months"
+        years: "initbiz.cumulussubscriptions::lang.plan_subscription.expiring_period_years"
+    trigger:
+        action: show
+        field: is_expiring
+        condition: checked
+plan_after_expiry:
+    label: "initbiz.cumulussubscriptions::lang.plan_subscription.plan_after_expiry"
+    tab: "initbiz.cumulussubscriptions::lang.plan_subscription.tab_label"
+    type: relation
+    trigger:
+        action: show
+        field: is_expiring
+        condition: checked
+is_paid:
+    label: "initbiz.cumulussubscriptions::lang.plan_subscription.is_paid"
+    tab: "initbiz.cumulussubscriptions::lang.plan_subscription.tab_label"
+    type: switch
+    span: left
+amount:
+    label: "initbiz.cumulussubscriptions::lang.plan_subscription.amount"
+    tab: "initbiz.cumulussubscriptions::lang.plan_subscription.tab_label"
+    type: number
+    span: left
+    trigger:
+        action: show
+        field: is_paid
+        condition: checked
