@@ -11,7 +11,6 @@
         id="<?= $field->getId() ?>"
         name="<?= $field->getName() ?>"
         class="form-control custom-select <?= $useSearch ? '' : 'select-no-search' ?>"
-        style="width: 30%"
         <?= $field->getAttributes() ?>
         <?= $field->placeholder ? 'data-placeholder="'.e(trans($field->placeholder)).'"' : '' ?>
         >

@@ -12,9 +12,14 @@ use RainLab\Location\Models\Setting;
 class Money extends FormWidgetBase
 {
     /**
-     * @var string Money format to display (long|short)
+     * @var string Money format to display
      */
     public $format = null;
+
+    /**
+     * @var string Mode of the field (amount|amountcurrency)
+     */
+    public $mode = 'amountcurrency';
 
     /**
      * {@inheritDoc}
@@ -28,6 +33,7 @@ class Money extends FormWidgetBase
     {
         $this->fillFromConfig([
             'format',
+            'mode',
         ]);
     }
 
@@ -51,8 +57,8 @@ class Money extends FormWidgetBase
         $value = $this->getLoadValue();
 
         if ($value) {
-            $amount = $this->getLoadValue()->amount;
-            $currencyCode = $this->getLoadValue()->currency;
+            $amount = $value['amount'];
+            $currencyCode = $value['currency'];
         } else {
             $amount = 0;
             $currencyCode = $primaryCurrency->currency_code;
@@ -89,5 +95,6 @@ class Money extends FormWidgetBase
      */
     public function loadAssets()
     {
+        $this->addCss(['~/plugins/initbiz/money/formwidgets/money/assets/css/money.css']);
     }
 }

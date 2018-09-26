@@ -4,16 +4,24 @@
 <?php else: ?>
     <div
         id="<?= $this->getId() ?>"
-        class="input-group number-field">
+        class="form-group number-field <?= $this->mode ?>-wrapper">
         <input
             name="<?= $name ?>"
-            id="<?= $this->getId('textarea') ?>"
+            id="<?= $this->getId('amount') ?>"
             value="<?= e($amount) ?>"
-            class="form-control"
+            class="form-control amount-input currency"
             autocomplete="off"
-            style="width: 70%; text-align:right;"
             />
 
-        <?= $this->makePartial('dropdown', ['field' => $currenciesField]) ?>
+        <?php if ($this->mode == "amountcurrency"): ?>
+            <?= $this->makePartial('currency_dropdown', ['field' => $currenciesField]) ?>
+        <?php else: ?>
+            <input
+                name="<?= $currenciesField->getName() ?>"
+                id="<?= $this->getId('currency') ?>"
+                value="<?= e($currenciesField->value) ?>"
+                type="hidden"
+                />
+        <?php endif ?>
     </div>
 <?php endif ?>
