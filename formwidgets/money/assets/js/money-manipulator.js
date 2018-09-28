@@ -26,13 +26,24 @@
     };
 
     /**
-     * Get nice formatted currency for almost all syntax input
+     * Get nice formatted currency
      * @param  {string|Number} value number you want to display in currency format
      * @return {string}     		 nice currency string
      */
     MoneyManipulator.prototype.parseCurrency = function (value) {
-        value = this.removeNonNumeric(value);
         value = this.addFractionDigits(value);
+        value = this.removeNonNumeric(value);
+        value = this.formatMoney(value);
+        return value;
+    };
+
+    /**
+     * Get nice formatted currency without adding fraction digits
+     * @param  {string|Number} value number you want to display in currency format
+     * @return {string}     		 nice currency string
+     */
+    MoneyManipulator.prototype.parseCurrencyRaw = function (value) {
+        value = this.removeNonNumeric(value);
         value = this.formatMoney(value);
         return value;
     };
@@ -71,8 +82,7 @@
         //convert to string
         value = "" + value;
         //remove all non-numeric chars and white spaces
-        var replaceString = "/[^0-9" + this.config.decimalPoint + "]\s/g";
-        value = value.replace(replaceString, "");
+        value = value.replace(/[^0-9]|\s/g, "");
 
         return value;
     };

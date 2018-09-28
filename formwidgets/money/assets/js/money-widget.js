@@ -24,5 +24,11 @@
         this.currencyInput.val(value).trigger("change");
     };
 
+    MoneyWidget.prototype.parseCurrencyInputRaw = function () {
+        var value = this.currencyInput.val();
+        value = this.manipulator.parseCurrencyRaw(value);
+        this.currencyInput.val(value).trigger("change");
+    };
+
     $.MoneyWidget = MoneyWidget;
 }(jQuery));
