@@ -29,7 +29,7 @@ class MoneyManipulator {
 	 * @param {string} value  number string to add fraction digits
 	 * @param {number} places number of fraction digits (default 2)
 	 */
-	addFractionDigits(value, places = 2) {
+	addFractionDigits(value, places = this.config.fractionDigits) {
 		var replaceString = "/" + this.config.decimalPoint + "/g";
 		value = value.replace(replaceString, "\.");
 		//split value by dot
@@ -95,11 +95,14 @@ class MoneyManipulator {
 		str = str.replace(/,/g, this.config.thousandSeparator);
 		str = str.replace(/x/, this.config.decimalPoint);
 
-		if (this.config.placeSymbolBefore) {
-			str = this.config.currencySymbol + str;
-		} else {
-			str = str + this.config.currencySymbol;
+		if (this.config.widgetMode == "amount") {
+			if (this.config.placeSymbolBefore) {
+				str = this.config.currencySymbol + str;
+			} else {
+				str = str + this.config.currencySymbol;
+			}
 		}
+
 		return str;
 	}
 
