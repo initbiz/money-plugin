@@ -1,4 +1,17 @@
 <!-- Money field -->
+<div class="money-widget">
+    <div
+        class="money-config"
+        data-widget-mode="<?= $this->mode ?>"
+        data-locale="<?= $locale ?>"
+        data-currency-code="<?= $currencyConfig['currency_code'] ?>"
+        data-currency-symbol="<?= $currencyConfig['currency_symbol'] ?>"
+        data-decimal-point="<?= $currencyConfig['decimal_point'] ?>"
+        data-thousand-separator="<?= $currencyConfig['thousand_separator'] ?>"
+        data-place-symbol-before="<?= $currencyConfig['place_symbol_before'] ?>"
+        data-fraction-digits="<?= $currencyConfig['fraction_digits'] ?>"
+        >
+    </div>
 <?php if ($this->previewMode): ?>
     <div class="form-control"><?= e(Currency::format($value, ['format' => $format])) ?></div>
 <?php else: ?>
@@ -25,3 +38,4 @@
         <?php endif ?>
     </div>
 <?php endif ?>
+</div>

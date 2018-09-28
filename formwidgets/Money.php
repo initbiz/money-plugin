@@ -53,12 +53,14 @@ class Money extends FormWidgetBase
     public function prepareVars()
     {
         $primaryCurrency = CurrencyModel::getPrimary();
+        $currency = $primaryCurrency;
 
         $value = $this->getLoadValue();
 
         if ($value) {
             $amount = $value['amount'];
             $currencyCode = $value['currency'];
+            $currency = CurrencyModel::findByCode($currencyCode);
         } else {
             $amount = 0;
             $currencyCode = $primaryCurrency->currency_code;
@@ -71,11 +73,16 @@ class Money extends FormWidgetBase
         $currenciesField->options = CurrencyModel::listEnabled();
         $currenciesField->value = $currencyCode;
 
+        $currencyConfig = $currency->toArray();
+
+
+        $this->vars['locale'] = \Backend\Models\Preference::get('locale');
         $this->vars['name'] = $name;
         $this->vars['format'] = $this->format;
         $this->vars['amount'] = $amount;
         $this->vars['primaryCurrency'] = $primaryCurrency;
         $this->vars['currenciesField'] = $currenciesField;
+        $this->vars['currencyConfig'] = $currencyConfig;
     }
 
     /**
@@ -96,5 +103,12 @@ class Money extends FormWidgetBase
     public function loadAssets()
     {
         $this->addCss(['~/plugins/initbiz/money/formwidgets/money/assets/css/money.css']);
+        $this->addJs([
+            '~/plugins/initbiz/money/formwidgets/money/assets/js/libs/dinero.js/src/dinero.min.js',
+            '~/plugins/initbiz/money/formwidgets/money/assets/js/money-helpers.js',
+            '~/plugins/initbiz/money/formwidgets/money/assets/js/money-manipulator.js',
+            '~/plugins/initbiz/money/formwidgets/money/assets/js/money.js',
+            '~/plugins/initbiz/money/formwidgets/money/assets/js/money-event-handlers.js'
+        ]);
     }
 }
