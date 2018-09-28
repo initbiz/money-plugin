@@ -1,12 +1,10 @@
-/**
- * Money form widget
- */
-class Money {
+(function ($) {
+    "use strict";
     /**
-     * create
+     * Money form widget
      * @param {Object} domElement DOM Object with money form widget
      */
-    constructor(domElement) {
+    var MoneyWidget = function (domElement) {
         /**
          * Money-widget div
          * @type {[type]}
@@ -15,14 +13,16 @@ class Money {
 
         var config = this.domElement.find($('.money-config')).data();
 
-        this.manipulator = new MoneyManipulator(config);
+        this.manipulator = new $.MoneyManipulator(config);
 
         this.currencyInput = this.domElement.find($('.amount-input'));
-    }
+    };
 
-    parseCurrencyInput() {
+    MoneyWidget.prototype.parseCurrencyInput = function () {
         var value = this.currencyInput.val();
         value = this.manipulator.parseCurrency(value);
         this.currencyInput.val(value).trigger("change");
-    }
-}
+    };
+
+    $.MoneyWidget = MoneyWidget;
+}(jQuery));

@@ -75,8 +75,6 @@ class Money extends FormWidgetBase
 
         $currencyConfig = $currency->toArray();
 
-
-        $this->vars['locale'] = \Backend\Models\Preference::get('locale');
         $this->vars['name'] = $name;
         $this->vars['format'] = $this->format;
         $this->vars['amount'] = $amount;
@@ -107,7 +105,7 @@ class Money extends FormWidgetBase
             '~/plugins/initbiz/money/formwidgets/money/assets/js/libs/dinero.js/src/dinero.min.js',
             '~/plugins/initbiz/money/formwidgets/money/assets/js/money-helpers.js',
             '~/plugins/initbiz/money/formwidgets/money/assets/js/money-manipulator.js',
-            '~/plugins/initbiz/money/formwidgets/money/assets/js/money.js',
+            '~/plugins/initbiz/money/formwidgets/money/assets/js/money-widget.js',
             '~/plugins/initbiz/money/formwidgets/money/assets/js/money-event-handlers.js'
         ]);
     }
