@@ -1,5 +1,5 @@
 plugin:
-    name: 'initbiz.cumulussubscriptions::lang.plugin.name'
-    description: 'initbiz.cumulussubscriptions::lang.plugin.description'
+    name: 'initbiz.money::lang.plugin.name'
+    description: 'initbiz.money::lang.plugin.description'
     author: Initbiz
     icon: oc-icon-money
