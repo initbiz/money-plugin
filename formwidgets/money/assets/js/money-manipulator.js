@@ -54,10 +54,11 @@
      * @param {number} places number of fraction digits (default 2)
      */
     MoneyManipulator.prototype.addFractionDigits = function (value, places = this.config.fractionDigits) {
-        var replaceString = "/" + this.config.decimalPoint + "/g";
-        value = value.replace(replaceString, "\.");
-        //split value by dot
-        var array = value.split('\.');
+        // var replaceString = "/" + this.config.decimalPoint + "/g";
+        // value = value.replace(replaceString, "\.");
+        //split value by decimalPoint
+        // var array = value.split('\.');
+        var array = value.split(this.config.decimalPoint);
 
         if (array[1]) {
             //Slice of fill string with precision number of zeros
