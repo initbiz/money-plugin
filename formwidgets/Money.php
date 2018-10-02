@@ -73,7 +73,7 @@ class Money extends FormWidgetBase
         $currenciesField->options = CurrencyModel::listEnabled();
         $currenciesField->value = $currencyCode;
 
-        $currencyConfig = $currency->toArray();
+        $currencyConfig = $currency;
 
         $this->vars['name'] = $name;
         $this->vars['format'] = $this->format;
