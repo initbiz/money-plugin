@@ -36,16 +36,6 @@ class MoneyFields extends ExtensionBase
         $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
             $amount = Helpers::removeNonNumeric($value['amount']);
             $model->attributes[$amountColumn] = $amount;
-            // if (!ctype_digit($amount)) {
-            //     throw new \ValidationException(
-            //         [
-            //             'amount' =>
-            //                 \Lang::get('system::validation.integer', [
-            //                     'attribute' => \Lang::get('initbiz.cumulussubscriptions::lang.plan_subscription.amount')
-            //                 ])
-            //         ]
-            //     );
-            // }
             $currencyId = Currency::findByCode($value['currency'])->id;
             $model->attributes[$currencyIdColumn] = $currencyId;
         });
