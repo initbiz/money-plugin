@@ -7,13 +7,13 @@
     var MoneyWidget = function (domElement) {
         /**
          * Money-widget div
-         * @type {[type]}
+         * @type {Object}
          */
         this.domElement = domElement;
 
-        var config = this.domElement.find($('.money-config')).data();
+        this.configManager = new $.ConfigManager(this.domElement.find($('.money-config')));
 
-        this.manipulator = new $.MoneyManipulator(config);
+        this.manipulator = new $.MoneyManipulator(this.configManager.get());
 
         this.currencyInput = this.domElement.find($('.amount-input'));
     };
