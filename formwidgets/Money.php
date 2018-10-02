@@ -102,11 +102,11 @@ class Money extends FormWidgetBase
     {
         $this->addCss(['~/plugins/initbiz/money/formwidgets/money/assets/css/money.css']);
         $this->addJs([
-            '~/plugins/initbiz/money/formwidgets/money/assets/js/libs/dinero.js/src/dinero.min.js',
-            '~/plugins/initbiz/money/formwidgets/money/assets/js/money-helpers.js',
-            '~/plugins/initbiz/money/formwidgets/money/assets/js/money-manipulator.js',
+            '~/plugins/initbiz/money/assets/js/libs/dinero.js/src/dinero.min.js',
+            '~/plugins/initbiz/money/assets/js/money-helpers.js',
+            '~/plugins/initbiz/money/assets/js/money-manipulator.js',
             '~/plugins/initbiz/money/formwidgets/money/assets/js/money-widget.js',
-            '~/plugins/initbiz/money/formwidgets/money/assets/js/money-event-handlers.js'
+            '~/plugins/initbiz/money/formwidgets/money/assets/js/money-widget-handlers.js'
         ]);
     }
 }
