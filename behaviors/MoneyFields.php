@@ -23,12 +23,12 @@ class MoneyFields extends ExtensionBase
     public function makeMoneyFields()
     {
         foreach ($this->model->moneyFields as $name => $columns) {
-            $this->makeMoneySetter($name, $columns['amountColumn'], $columns['currencyIdColumn']);
-            $this->makeMoneyGetter($name, $columns['amountColumn'], $columns['currencyIdColumn']);
+            $this->makeMoneyMutator($name, $columns['amountColumn'], $columns['currencyIdColumn']);
+            $this->makeMoneyAccessor($name, $columns['amountColumn'], $columns['currencyIdColumn']);
         }
     }
 
-    public function makeMoneySetter($name, $amountColumn, $currencyIdColumn)
+    public function makeMoneyMutator($name, $amountColumn, $currencyIdColumn)
     {
         $methodName = 'set'.studly_case($name).'Attribute';
         $model = $this->model;
@@ -51,7 +51,7 @@ class MoneyFields extends ExtensionBase
         });
     }
 
-    public function makeMoneyGetter($name, $amountColumn, $currencyIdColumn)
+    public function makeMoneyAccessor($name, $amountColumn, $currencyIdColumn)
     {
         $methodName = 'get'.studly_case($name).'Attribute';
         $model = $this->model;
