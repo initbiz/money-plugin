@@ -20,7 +20,7 @@ Currencies::extendFormFields(function ($widget) {
 
 Currency::extend(function ($model) {
     //By default 2 fraction digits
-    $model->addDynamicMethod('getFractionDigitsAttribute', function ($value) use ($model) {
+    $model->addDynamicMethod('getInitbizMoneyFractionDigitsAttribute', function ($value) use ($model) {
         if ($value === null) {
             return 2;
         }

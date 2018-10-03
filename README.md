@@ -9,9 +9,10 @@ So this plugin was created to help with handling such complication.
 
 # Documentation
 
-The plugin installs [Brick/Money](https://github.com/brick/money) library as a requirement.
-
-It also uses [Dinero.js](https://sarahdayan.github.io/dinero.js/) to manage money in frontend.
+The plugin uses:
+* [Responsiv.Currency](https://octobercms.com/plugin/responsiv-currency) as a base for managing currencies,
+* [Brick/Money](https://github.com/brick/money) library to manage money in backend,
+* [Dinero.js](https://sarahdayan.github.io/dinero.js/) to manage money in frontend.
 
 ## Backend form widget
 The plugins adds backend form widget called money.

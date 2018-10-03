@@ -8,14 +8,14 @@ class UpdateResponsiveCurrencyCurrenciesTable extends Migration
     public function up()
     {
         Schema::table('responsiv_currency_currencies', function ($table) {
-            $table->integer('fraction_digits')->unsigned()->nullable();
+            $table->integer('initbiz_money_fraction_digits')->unsigned()->nullable();
         });
     }
 
     public function down()
     {
         Schema::table('responsiv_currency_currencies', function ($table) {
-            $table->dropColumn('fraction_digits');
+            $table->dropColumn('initbiz_money_fraction_digits');
         });
     }
 }
