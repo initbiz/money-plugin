@@ -26,6 +26,9 @@ class MoneyFields extends ExtensionBase
             $this->makeMoneyMutator($name, $columns['amountColumn'], $columns['currencyIdColumn']);
             $this->makeMoneyAccessor($name, $columns['amountColumn'], $columns['currencyIdColumn']);
         }
+
+        // somehow October tries to save moneyFields so I have to unset it at the end (it is recreated at init)
+        unset($this->model->moneyFields);
     }
 
     public function makeMoneyMutator($name, $amountColumn, $currencyIdColumn)
@@ -33,7 +36,7 @@ class MoneyFields extends ExtensionBase
         $methodName = 'set'.studly_case($name).'Attribute';
         $model = $this->model;
 
-        $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
+        $this->model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
             $amount = Helpers::removeNonNumeric($value['amount']);
             $model->attributes[$amountColumn] = $amount;
             $currencyId = Currency::findByCode($value['currency'])->id;
