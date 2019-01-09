@@ -27,7 +27,7 @@ class MoneyFields extends ExtensionBase
             $this->makeMoneyAccessor($name, $columns['amountColumn'], $columns['currencyIdColumn']);
         }
 
-        // somehow October tries to save moneyFields so I have to unset it at the end (it is recreated at init)
+        // After mutators and accessors are created we have to unset moneyFields so that Laravel will not try to save it to DB
         unset($this->model->moneyFields);
     }
 
@@ -36,7 +36,7 @@ class MoneyFields extends ExtensionBase
         $methodName = 'set'.studly_case($name).'Attribute';
         $model = $this->model;
 
-        $this->model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
+        $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
             $amount = Helpers::removeNonNumeric($value['amount']);
             $model->attributes[$amountColumn] = $amount;
             $currencyId = Currency::findByCode($value['currency'])->id;
