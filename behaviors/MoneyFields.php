@@ -1,16 +1,18 @@
 <?php namespace Initbiz\Money\Behaviors;
 
+use System\Classes\ModelBehavior;
 use Initbiz\Money\Classes\Helpers;
 use Responsiv\Currency\Models\Currency;
-use \October\Rain\Extension\ExtensionBase;
 
 /**
  * Behavior to use moneyFields property to define which fields are of type money
  * and which columns in DB store amount and currency_id for the fields
  */
 
-class MoneyFields extends ExtensionBase
+class MoneyFields extends ModelBehavior
 {
+    protected $requiredProperties = ['moneyFields'];
+
     protected $model;
 
     public function __construct($model)

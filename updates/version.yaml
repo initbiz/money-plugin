@@ -1,3 +1,5 @@
 1.0.1:
     - 'Initialize plugin.'
     - update_responsive_currency_currencies_table.php
+1.0.2:
+    - 'MoneyFields behavior fixed'

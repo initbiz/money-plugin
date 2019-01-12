@@ -47,7 +47,7 @@ Using the bevarior looks like in this example:
 ```php
     class Product extends Model
     {
-        protected $moneyFields = [
+        public $moneyFields = [
             'price' => [
                 'amountColumn' => 'amount',
                 'currencyIdColumn' => 'currency_id'
