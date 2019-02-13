@@ -1,5 +1,5 @@
 {
-    "name": "Initbiz/Money",
+    "name": "initbiz/oc-money-plugin",
     "type": "october-plugin",
     "description": "Utility to use money types in OctoberCMS",
     "homepage": "http://init.biz",
