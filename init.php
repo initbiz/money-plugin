@@ -5,25 +5,28 @@ use File;
 use Event;
 use Backend;
 use BackendMenu;
-use Responsiv\Currency\Models\Currency;
-use Responsiv\Currency\Controllers\Currencies;
+use System\Classes\PluginManager;
 
-Currencies::extendFormFields(function ($widget) {
-    if (!$widget->model instanceof Currency) {
-        return;
-    }
-
-    $configFile = __DIR__ . '/config/extend_currencies_form.yaml';
-    $config = Yaml::parse(File::get($configFile));
-    $widget->addFields($config);
-});
-
-Currency::extend(function ($model) {
-    //By default 2 fraction digits
-    $model->addDynamicMethod('getInitbizMoneyFractionDigitsAttribute', function ($value) use ($model) {
-        if ($value === null) {
-            return 2;
+$pluginManager = PluginManager::instance();
+$plugins = $pluginManager->getPlugins();
+if (array_key_exists('Responsive.Currency', $plugins)) {
+    \Responsiv\Currency\Controllers\Currencies::extendFormFields(function ($widget) {
+        if (!$widget->model instanceof Currency) {
+            return;
         }
-        return $value;
+
+        $configFile = __DIR__ . '/config/extend_currencies_form.yaml';
+        $config = Yaml::parse(File::get($configFile));
+        $widget->addFields($config);
     });
-});
+
+    \Responsiv\Currency\Models\Currency::extend(function ($model) {
+        //By default 2 fraction digits
+        $model->addDynamicMethod('getInitbizMoneyFractionDigitsAttribute', function ($value) use ($model) {
+            if ($value === null) {
+                return 2;
+            }
+            return $value;
+        });
+    });
+}
