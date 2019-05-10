@@ -5,3 +5,5 @@
     - 'MoneyFields behavior fixed'
 1.0.3:
     - 'Small extending fix for better DX'
+1.0.4:
+    - 'Minor bug fixes'
