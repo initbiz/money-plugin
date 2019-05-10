@@ -9,9 +9,9 @@ use System\Classes\PluginManager;
 
 $pluginManager = PluginManager::instance();
 $plugins = $pluginManager->getPlugins();
-if (array_key_exists('Responsive.Currency', $plugins)) {
+if (array_key_exists('Responsiv.Currency', $plugins)) {
     \Responsiv\Currency\Controllers\Currencies::extendFormFields(function ($widget) {
-        if (!$widget->model instanceof Currency) {
+        if (!$widget->model instanceof \Responsiv\Currency\Models\Currency) {
             return;
         }
 
