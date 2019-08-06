@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
 
-    $( document ).ready(function() {
+    function registerMoneyHandlers() {
     	$('.money-widget').each(function() {
     		var moneyWidget = new $.MoneyWidget($(this));
     		moneyWidget.parseCurrencyInputRaw();
@@ -11,6 +11,14 @@
         	var moneyWidget = new $.MoneyWidget($(this).closest('.money-widget'));
         	moneyWidget.parseCurrencyInput();
         });
+    }
+
+    $( document ).ready(function() {
+        registerMoneyHandlers();
     });
+
+    $(window).on('ajaxUpdateComplete', function(event, context, data) {
+        registerMoneyHandlers();
+    })
 
 }(jQuery));
