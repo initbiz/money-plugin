@@ -65,6 +65,9 @@ This code will dynamically add two methods to `Product` model: `setPriceAttribut
 
 If you want to have only one currency in your model there should not be problems with using the same column name for more than one field. Remember though that if you will not change currency for all inputs that have the same column, while saving the value might be overrided.
 
+## Money backend column type
+The plugin registers new column type: `money`. It displays the amount and currency nicely.
+
 ## Future plans (TODO)
 * Currency mode (to change all currencies on page)
 * Automatically converting and displaying amounts in selected format (extending `Responsiv.Currency`)

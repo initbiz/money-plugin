@@ -2,6 +2,9 @@
 
 namespace Initbiz\Money\Classes;
 
+use Responsiv\Currency\Models\Currency;
+use Responsiv\Currency\Helpers\Currency as CurrencyHelper;
+
 class Helpers
 {
     /**
@@ -13,6 +16,26 @@ class Helpers
     {
         $value = $value;
         $value = preg_replace('/[^0-9]|\s/', "", $value);
+        return $value;
+    }
+
+    /**
+     * Format money using integer amount and currencyCode format definition
+     *
+     * @param int $amount
+     * @param string $currencyCode
+     * @return string
+     */
+    public static function formatMoney(int $amount, string $currencyCode): String
+    {
+        $currency = Currency::findByCode($currencyCode);
+        
+        $fractionDigits = $currency->initbiz_money_fraction_digits;
+
+        $currencyHelper = new CurrencyHelper();
+
+        $value = $currencyHelper->format($amount / pow(10, $fractionDigits));
+
         return $value;
     }
 }

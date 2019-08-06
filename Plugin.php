@@ -2,6 +2,7 @@
 
 use Backend;
 use System\Classes\PluginBase;
+use Initbiz\Money\Classes\Helpers;
 
 /**
  * Money Plugin Information File
@@ -24,5 +25,17 @@ class Plugin extends PluginBase
                 'code'  => 'money'
             ]
         ];
+    }
+
+    public function registerListColumnTypes()
+    {
+        return [
+            'money' => [$this, 'evalMoneyColumn'],
+        ];
+    }
+
+    public function evalMoneyColumn($value, $column, $record)
+    {
+        return Helpers::formatMoney($value['amount'], $value['currency']);
     }
 }
