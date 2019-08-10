@@ -4,7 +4,7 @@
     $emptyOption = $field->getConfig('emptyOption', $field->placeholder);
 ?>
 <!-- Dropdown -->
-<?php if ($this->previewMode): ?>
+<?php if ($this->previewMode || $this->formField->disabled): ?>
     <div class="form-control"><?= (isset($fieldOptions[$field->value])) ? e(trans($fieldOptions[$field->value])) : '' ?></div>
 <?php else: ?>
     <select

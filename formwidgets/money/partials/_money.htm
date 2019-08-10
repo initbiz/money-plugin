@@ -11,8 +11,8 @@
         data-fraction-digits="<?= $currencyConfig->initbiz_money_fraction_digits ?>"
         >
     </div>
-<?php if ($this->previewMode): ?>
-    <div class="form-control"><?= e(Currency::format($value, ['format' => $format])) ?></div>
+<?php if ($this->previewMode || $this->formField->disabled): ?>
+    <div class="form-control" style="background-color: #eee !important; cursor: not-allowed;"><?= e(Currency::format($amount, ['format' => $format])) ?></div>
 <?php else: ?>
     <div
         id="<?= $this->getId() ?>"
