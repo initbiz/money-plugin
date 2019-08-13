@@ -41,6 +41,10 @@ class Helpers
 
     public static function formatMoneyBoth(array $params): String
     {
+        if (empty($params)) {
+            return '';
+        }
+
         $value = self::formatMoney($params['amount'], $params['currency']);
 
         return $value;
