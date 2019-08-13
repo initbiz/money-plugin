@@ -36,6 +36,9 @@ class Plugin extends PluginBase
 
     public function evalMoneyColumn($value, $column, $record)
     {
+        if (empty($value)) {
+            return null;
+        }
         return Helpers::formatMoney($value['amount'], $value['currency']);
     }
 }

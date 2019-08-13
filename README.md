@@ -72,3 +72,4 @@ The plugin registers new column type: `money`. It displays the amount and curren
 * Currency mode (to change all currencies on page)
 * Automatically converting and displaying amounts in selected format (extending `Responsiv.Currency`)
 * Register settings to define if we want to use localized config or 'per currency' format
+* Use Brick/Money to get fraction digits
