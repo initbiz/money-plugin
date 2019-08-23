@@ -34,7 +34,7 @@ class Helpers
 
         $currencyHelper = new CurrencyHelper();
 
-        $value = $currencyHelper->format($amount / pow(10, $fractionDigits));
+        $value = $currencyHelper->format($amount / pow(10, $fractionDigits), ['in' => $currencyCode]);
 
         return $value;
     }
