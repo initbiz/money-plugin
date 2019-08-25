@@ -39,10 +39,12 @@ class MoneyFields extends ModelBehavior
         $model = $this->model;
 
         $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
-            $amount = Helpers::removeNonNumeric($value['amount']);
-            $model->attributes[$amountColumn] = $amount;
-            $currencyId = Currency::findByCode($value['currency'])->id;
-            $model->attributes[$currencyIdColumn] = $currencyId;
+            if (!empty($value['amount']) && !empty($value['currency'])) {
+                $amount = Helpers::removeNonNumeric($value['amount']);
+                $model->attributes[$amountColumn] = $amount;
+                $currencyId = Currency::findByCode($value['currency'])->id;
+                $model->attributes[$currencyIdColumn] = $currencyId;
+            }
         });
     }
 

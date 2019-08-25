@@ -72,6 +72,9 @@ class Money extends FormWidgetBase
         $currenciesField = new FormField($currenciesFieldName, $this->label."_currency");
         $currenciesField->options = CurrencyModel::listEnabled();
         $currenciesField->value = $currencyCode;
+        $currenciesField->attributes = $this->formField->attributes;
+        $currenciesField->disabled = $this->formField->disabled;
+        $currenciesField->readOnly = $this->formField->readOnly;
 
         $currencyConfig = $currency;
 

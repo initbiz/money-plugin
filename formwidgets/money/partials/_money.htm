@@ -11,9 +11,6 @@
         data-fraction-digits="<?= $currencyConfig->initbiz_money_fraction_digits ?>"
         >
     </div>
-<?php if ($this->previewMode || $this->formField->disabled): ?>
-    <div class="form-control" style="background-color: #eee !important; cursor: not-allowed;"><?= e(Currency::format($amount, ['format' => $format])) ?></div>
-<?php else: ?>
     <div
         id="<?= $this->getId() ?>"
         class="form-group number-field <?= $this->mode ?>-wrapper">
@@ -23,10 +20,11 @@
             value="<?= e($amount) ?>"
             class="form-control amount-input currency"
             autocomplete="off"
+            <?= $this->formField->getAttributes() ?>
             />
 
         <?php if ($this->mode == "amountcurrency"): ?>
-            <?= $this->makePartial('currency_dropdown', ['field' => $currenciesField]) ?>
+            <?= $this->makePartial('~/modules/backend/widgets/form/partials/_field_dropdown.htm', ['field' => $currenciesField]) ?>
         <?php else: ?>
             <input
                 name="<?= $currenciesField->getName() ?>"
@@ -36,5 +34,4 @@
                 />
         <?php endif ?>
     </div>
-<?php endif ?>
 </div>
