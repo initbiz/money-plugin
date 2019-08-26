@@ -7,7 +7,7 @@
     float: left;
 }
 
-.amountcurrency-wrapper .select2 {
+.amountcurrency-wrapper .select2, .amountcurrency-wrapper div.form-control {
     width: 30%;
     float: right;
 }
