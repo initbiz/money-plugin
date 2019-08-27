@@ -41,4 +41,18 @@ class Plugin extends PluginBase
         }
         return Helpers::formatMoney($value['amount'], $value['currency']);
     }
+
+    public function registerMarkupTags()
+    {
+        return [
+            'filters' => [
+                'money' => [$this, 'formatMoney']
+            ],
+        ];
+    }
+
+    public function formatMoney($value)
+    {
+        return Helpers::formatMoneyBoth($value);
+    }
 }
