@@ -16,7 +16,6 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
-        "brick/money": "0.3.*"
+        "brick/money": "dev-master"
     }
 }
