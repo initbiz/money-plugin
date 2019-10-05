@@ -27,6 +27,16 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * Registers any frontend form widgets implemented in this plugin for PowerComponents plugin
+     */
+    public function registerFrontendFormWidgets()
+    {
+        return [
+            'Initbiz\Money\FrontendFormWidgets\Money' => 'money',
+        ];
+    }
+
     public function registerListColumnTypes()
     {
         return [
