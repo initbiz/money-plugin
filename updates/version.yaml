@@ -13,3 +13,5 @@
     - 'Updating partials with moneyFields works'
 1.0.7:
     - 'Added money column type'
+1.0.8:
+    - 'Minor bug fixes, a few features added'
