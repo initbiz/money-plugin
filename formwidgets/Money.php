@@ -96,7 +96,7 @@ class Money extends FormWidgetBase
             return FormField::NO_SAVE_DATA;
         }
 
-        $value['amount'] = Helpers::removeNonNumeric($value['amount']);
+        $value['amount'] = (int) Helpers::removeNonNumeric($value['amount']);
         return $value;
     }
 

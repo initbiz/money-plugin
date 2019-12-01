@@ -58,7 +58,7 @@ class MoneyFields extends ModelBehavior
 
             if ($model->exists) {
                 if (isset($model->$amountColumn)) {
-                    $value['amount'] = $model->$amountColumn;
+                    $value['amount'] = (int) $model->$amountColumn;
                 }
                 if (isset($model->$currencyIdColumn)) {
                     $value['currency'] = Currency::find($model->$currencyIdColumn)->currency_code;
