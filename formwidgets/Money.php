@@ -2,9 +2,10 @@
 
 use Html;
 use Backend\Classes\FormField;
+use Initbiz\Money\Classes\Helpers;
 use Backend\Classes\FormWidgetBase;
-use Responsiv\Currency\Models\Currency as CurrencyModel;
 use RainLab\Location\Models\Setting;
+use Responsiv\Currency\Models\Currency as CurrencyModel;
 
 /**
  * Money input
@@ -95,6 +96,7 @@ class Money extends FormWidgetBase
             return FormField::NO_SAVE_DATA;
         }
 
+        $value['amount'] = Helpers::removeNonNumeric($value['amount']);
         return $value;
     }
 

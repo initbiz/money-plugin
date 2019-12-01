@@ -2,6 +2,7 @@
 
 use Html;
 use Backend\Classes\FormField;
+use Initbiz\Money\Classes\Helpers;
 use RainLab\Location\Models\Setting;
 use Responsiv\Currency\Models\Currency as CurrencyModel;
 use Initbiz\PowerComponents\Classes\FrontendFormWidgetBase;
@@ -95,6 +96,7 @@ class Money extends FrontendFormWidgetBase
             return FormField::NO_SAVE_DATA;
         }
 
+        $value['amount'] = Helpers::removeNonNumeric($value['amount']);
         return $value;
     }
 
