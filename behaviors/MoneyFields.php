@@ -56,13 +56,11 @@ class MoneyFields extends ModelBehavior
         $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
             $value = [];
 
-            if ($model->exists) {
-                if (isset($model->$amountColumn)) {
-                    $value['amount'] = (int) $model->$amountColumn;
-                }
-                if (isset($model->$currencyIdColumn)) {
-                    $value['currency'] = Currency::find($model->$currencyIdColumn)->currency_code;
-                }
+            if (isset($model->$amountColumn)) {
+                $value['amount'] = (int) $model->$amountColumn;
+            }
+            if (isset($model->$currencyIdColumn)) {
+                $value['currency'] = Currency::find($model->$currencyIdColumn)->currency_code;
             }
 
             return $value;
