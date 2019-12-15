@@ -65,7 +65,7 @@ class Helpers
      * @param array $params
      * @return String
      */
-    public static function formatMoneyBoth(array $params): String
+    public static function formatMoneyBoth(?array $params): String
     {
         if (empty($params)) {
             return '';
