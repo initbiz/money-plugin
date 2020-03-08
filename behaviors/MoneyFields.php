@@ -22,6 +22,11 @@ class MoneyFields extends ModelBehavior
         $this->makeMoneyFields();
     }
 
+    /**
+     * Extend the model with accessors and mutators for moneyFields defined in it
+     *
+     * @return void
+     */
     public function makeMoneyFields()
     {
         foreach ($this->model->moneyFields as $name => $columns) {
@@ -29,25 +34,43 @@ class MoneyFields extends ModelBehavior
             $this->makeMoneyAccessor($name, $columns['amountColumn'], $columns['currencyIdColumn']);
         }
 
-        // After mutators and accessors are created we have to unset moneyFields so that Laravel will not try to save it to DB
+        // After mutators and accessors are created we have to unset moneyFields
+        // so that Laravel will not try to save it to DB as it is a public attribute
         unset($this->model->moneyFields);
     }
 
+    /**
+     * Extend the model with set*MoneyField*Attribute
+     *
+     * @param string $name name of the attribute to add money mutator
+     * @param string $amountColumn unsigned integer or money type column name of the model
+     * @param string $currencyIdColumn unsigned integer foreign key with the responsiv_currency.id
+     * @return void
+     */
     public function makeMoneyMutator($name, $amountColumn, $currencyIdColumn)
     {
         $methodName = 'set'.studly_case($name).'Attribute';
         $model = $this->model;
 
         $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
-            if (!empty($value['amount']) && !empty($value['currency'])) {
-                $amount = Helpers::removeNonNumeric($value['amount']);
-                $model->attributes[$amountColumn] = $amount;
-                $currencyId = Currency::findByCode($value['currency'])->id;
-                $model->attributes[$currencyIdColumn] = $currencyId;
-            }
+            $model->attributes[$amountColumn] = empty($value['amount'])
+                    ? 0
+                    : Helpers::removeNonNumeric($value['amount']);
+
+            $model->attributes[$currencyIdColumn] = empty($value['currency'])
+                    ? Currency::getPrimary()->id
+                    : Currency::findByCode($value['currency'])->id;
         });
     }
 
+    /**
+     * Extend the model with get*MoneyField*Attribute
+     *
+     * @param string $name name of the attribute to add money accessor
+     * @param string $amountColumn unsigned integer or money type column name of the model
+     * @param string $currencyIdColumn unsigned integer foreign key with the responsiv_currency.id
+     * @return void
+     */
     public function makeMoneyAccessor($name, $amountColumn, $currencyIdColumn)
     {
         $methodName = 'get'.studly_case($name).'Attribute';
