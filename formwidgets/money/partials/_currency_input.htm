@@ -1,0 +1,9 @@
+<?php if ($this->mode == "amountcurrency"): ?>
+    <?= $this->makePartial('~/modules/backend/widgets/form/partials/_field_dropdown.htm', ['field' => $currenciesField]) ?>
+<?php else: ?>
+    <input
+        name="<?= $currenciesField->getName() ?>"
+        value="<?= e($currenciesField->value) ?>"
+        type="hidden"
+        />
+<?php endif ?>

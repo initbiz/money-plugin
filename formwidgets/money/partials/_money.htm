@@ -1,5 +1,6 @@
 <!-- Money field -->
-<div class="money-widget">
+<div id="<?= $this->getId() ?>"
+     class="money-widget">
     <div
         class="money-config"
         data-widget-mode="<?= $this->mode ?>"
@@ -11,27 +12,13 @@
         data-fraction-digits="<?= $currencyConfig->initbiz_money_fraction_digits ?>"
         >
     </div>
-    <div
-        id="<?= $this->getId() ?>"
-        class="form-group number-field <?= $this->mode ?>-wrapper">
-        <input
-            name="<?= $name ?>"
-            id="<?= $this->getId('amount') ?>"
-            value="<?= e($amount) ?>"
-            class="form-control amount-input currency"
-            autocomplete="off"
-            <?= $this->formField->getAttributes() ?>
-            />
+    <div class="form-group number-field <?= $this->mode ?>-wrapper">
+        <div id="<?= $this->getId('amount') ?>">
+            <?= $this->makePartial('amount_input', ['name' => $name, 'amount' => $amount, 'attributes' => $this->formField->getAttributes()]) ?>
+        </div>
 
-        <?php if ($this->mode == "amountcurrency"): ?>
-            <?= $this->makePartial('~/modules/backend/widgets/form/partials/_field_dropdown.htm', ['field' => $currenciesField]) ?>
-        <?php else: ?>
-            <input
-                name="<?= $currenciesField->getName() ?>"
-                id="<?= $this->getId('currency') ?>"
-                value="<?= e($currenciesField->value) ?>"
-                type="hidden"
-                />
-        <?php endif ?>
+        <div id="<?= $this->getId('currency') ?>">
+            <?= $this->makePartial('currency_input', ['field' => $currenciesField]) ?>
+        </div>
     </div>
 </div>
