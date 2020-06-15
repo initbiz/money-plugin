@@ -53,13 +53,13 @@ class MoneyFields extends ModelBehavior
         $model = $this->model;
 
         $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
-            $model->attributes[$amountColumn] = empty($value['amount'])
+            $model->setAttribute($amountColumn, empty($value['amount'])
                     ? 0
-                    : Helpers::removeNonNumeric($value['amount']);
+                    : Helpers::removeNonNumeric($value['amount']));
 
-            $model->attributes[$currencyIdColumn] = empty($value['currency'])
+            $model->setAttribute($currencyIdColumn, empty($value['currency'])
                     ? Currency::getPrimary()->id
-                    : Currency::findByCode($value['currency'])->id;
+                    : Currency::findByCode($value['currency'])->id);
         });
     }
 
@@ -79,14 +79,15 @@ class MoneyFields extends ModelBehavior
         $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
             $value = [];
 
-            if (isset($model->$amountColumn)) {
-                $value['amount'] = (int) $model->$amountColumn;
+            if (isset($model->attributes[$amountColumn]) && ! empty($model->attributes[$amountColumn])) {
+                $value['amount'] = (int) $model->getAttribute($amountColumn);
             } else {
                 $value['amount'] = 0;
             }
 
             if (isset($model->$currencyIdColumn)) {
-                $value['currency'] = Currency::find($model->$currencyIdColumn)->currency_code;
+                $currencyId = $model->getAttribute($currencyIdColumn);
+                $value['currency'] = Currency::find($currencyId)->currency_code;
             } else {
                 $value['currency'] = Currency::getPrimary()->currency_code;
             }
