@@ -96,7 +96,7 @@ class Money extends FormWidgetBase
             return FormField::NO_SAVE_DATA;
         }
 
-        if(empty($value)) {
+        if(is_null($value)) {
             return null;
         }
 
