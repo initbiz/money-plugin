@@ -23,6 +23,7 @@
         }
     ],
     "require": {
-        "brick/money": "dev-master"
+        "brick/money": "dev-master",
+        "responsiv/currency": "dev-master"
     }
 }
