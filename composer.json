@@ -1,9 +1,16 @@
 {
-    "name": "initbiz/oc-money-plugin",
+    "name": "initbiz/money-plugin",
     "type": "october-plugin",
     "description": "Utility to use money types in OctoberCMS",
-    "homepage": "http://init.biz",
-    "keywords": ["october", "octobercms", "php", "money", "cash", "currency"],
+    "homepage": "https://init.biz",
+    "keywords": [
+        "october",
+        "octobercms",
+        "php",
+        "money",
+        "cash",
+        "currency"
+    ],
     "license": "MIT",
     "authors": [
         {
