@@ -2,24 +2,11 @@
     "name": "initbiz/money-plugin",
     "type": "october-plugin",
     "description": "Utility to use money types in OctoberCMS",
-    "homepage": "https://init.biz",
-    "keywords": [
-        "october",
-        "octobercms",
-        "php",
-        "money",
-        "cash",
-        "currency"
-    ],
     "license": "MIT",
     "authors": [
         {
             "name": "Tomasz Strojny",
             "email": "tomasz@init.biz"
-        },
-        {
-            "name": "Piotr Rogowski",
-            "email": "piotr@init.biz"
         }
     ],
     "require": {
