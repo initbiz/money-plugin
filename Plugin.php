@@ -5,6 +5,7 @@ namespace Initbiz\Money;
 use Event;
 use System\Classes\PluginBase;
 use Initbiz\Money\Classes\Helpers;
+use Initbiz\Money\FormWidgets\Money;
 
 /**
  * Money Plugin Information File
@@ -29,7 +30,7 @@ class Plugin extends PluginBase
     public function registerFormWidgets()
     {
         return [
-            Initbiz\Money\FormWidgets\Money::class => [
+            Money::class => [
                 'label' => 'Money',
                 'code'  => 'money'
             ]

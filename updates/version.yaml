@@ -19,3 +19,5 @@
     - 'Fixed mutators and accessors with zero and null values'
 1.0.10:
     - 'Code cleanup'
+1.0.11:
+    - 'Small fix & new accessors types: price_decimal and price_formatted'
