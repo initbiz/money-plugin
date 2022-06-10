@@ -1,6 +1,8 @@
-<?php namespace Initbiz\Money;
+<?php
 
-use Backend;
+namespace Initbiz\Money;
+
+use Event;
 use System\Classes\PluginBase;
 use Initbiz\Money\Classes\Helpers;
 
@@ -12,7 +14,14 @@ class Plugin extends PluginBase
     /**
      * @var array Plugin dependencies
      */
-    public $require = ['Responsiv.Currency'];
+    public $require = [
+        'Responsiv.Currency'
+    ];
+
+    public function boot()
+    {
+        Event::subscribe(\Initbiz\Money\EventHandlers\ResponsivCurrencyHandler::class);
+    }
 
     /**
      * Registers any form widgets implemented in this plugin.
@@ -20,20 +29,10 @@ class Plugin extends PluginBase
     public function registerFormWidgets()
     {
         return [
-            'Initbiz\Money\FormWidgets\Money' => [
+            Initbiz\Money\FormWidgets\Money::class => [
                 'label' => 'Money',
                 'code'  => 'money'
             ]
-        ];
-    }
-
-    /**
-     * Registers any frontend form widgets implemented in this plugin for PowerComponents plugin
-     */
-    public function registerFrontendFormWidgets()
-    {
-        return [
-            'Initbiz\Money\FrontendFormWidgets\Money' => 'money',
         ];
     }
 
@@ -49,6 +48,7 @@ class Plugin extends PluginBase
         if (empty($value)) {
             return null;
         }
+
         return Helpers::formatMoney($value['amount'], $value['currency']);
     }
 

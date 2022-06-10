@@ -1,9 +1,0 @@
-# ===================================
-#  Extended Profile Field Definitions
-# ===================================
-
-initbiz_money_fraction_digits:
-    label: "initbiz.money::lang.currency_form.fraction_digits"
-    type: number
-    span: right
-    default: 2

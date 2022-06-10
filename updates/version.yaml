@@ -17,3 +17,5 @@
     - 'Minor bug fixes, a few features added'
 1.0.9:
     - 'Fixed mutators and accessors with zero and null values'
+1.0.10:
+    - 'Code cleanup'

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Initbiz\Money\Classes;
 
@@ -9,14 +11,12 @@ class Helpers
 {
     /**
      * Removes all non numeric characters from string
-     * @param  string $value String with bloat
+     * @param  string $value string with bloat
      * @return string        clear number string
      */
-    public static function removeNonNumeric(String $value): String
+    public static function removeNonNumeric(string $value): string
     {
-        $value = $value;
-        $value = preg_replace('/[^0-9]|\s/', "", $value);
-        return $value;
+        return preg_replace('/[^0-9]|\s/', "", $value);
     }
 
     /**
@@ -26,13 +26,11 @@ class Helpers
      * @param string $currencyCode
      * @return string
      */
-    public static function formatMoney(int $amount, string $currencyCode): String
+    public static function formatMoney(int $amount, string $currencyCode): string
     {
         $currencyHelper = new CurrencyHelper();
 
-        $value = $currencyHelper->format(self::formatAmountDot($amount, $currencyCode), ['in' => $currencyCode]);
-
-        return $value;
+        return $currencyHelper->format(self::formatAmountDot($amount, $currencyCode), ['in' => $currencyCode]);
     }
 
     /**
@@ -40,40 +38,36 @@ class Helpers
      *
      * @param integer $amount
      * @param string $currencyCode
-     * @return String
+     * @return string
      */
-    public static function formatAmountDot(int $amount, string $currencyCode): String
+    public static function formatAmountDot(int $amount, string $currencyCode): string
     {
         $currency = Currency::findByCode($currencyCode);
-        
+
         $fractionDigits = $currency->initbiz_money_fraction_digits;
 
         $dotAmount = $amount / pow(10, $fractionDigits);
 
-        $dotAmount = (string)$dotAmount;
-
-        return $dotAmount;
+        return (string) $dotAmount;
     }
 
     /**
-     * Format money using array where 
+     * Format money using array where
      * [
      *    'amount' => <amount>,
      *    'currency' => <currency_code>,
      * ]
      *
      * @param array $params
-     * @return String
+     * @return string
      */
-    public static function formatMoneyBoth(?array $params): String
+    public static function formatMoneyBoth(?array $params): string
     {
         if (empty($params)) {
             return '';
         }
 
-        $value = self::formatMoney($params['amount'], $params['currency']);
-
-        return $value;
+        return self::formatMoney($params['amount'], $params['currency']);
     }
 
     /**
@@ -84,17 +78,14 @@ class Helpers
      * ]
      *
      * @param array $params
-     * @return String
+     * @return string
      */
-    public static function formatAmountDotBoth(array $params): String
+    public static function formatAmountDotBoth(array $params): string
     {
         if (empty($params)) {
             return '';
         }
 
-        $value = self::formatAmountDot($params['amount'], $params['currency']);
-
-        return $value;
+        return self::formatAmountDot($params['amount'], $params['currency']);
     }
-
 }

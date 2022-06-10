@@ -1,4 +1,6 @@
-<?php namespace Initbiz\Money\Behaviors;
+<?php
+
+namespace Initbiz\Money\Behaviors;
 
 use System\Classes\ModelBehavior;
 use Initbiz\Money\Classes\Helpers;
@@ -31,7 +33,7 @@ class MoneyFields extends ModelBehavior
     {
         foreach ($this->model->moneyFields as $name => $columns) {
             $this->makeMoneyMutator($name, $columns['amountColumn'], $columns['currencyIdColumn']);
-            $this->makeMoneyAccessor($name, $columns['amountColumn'], $columns['currencyIdColumn']);
+            $this->makeMoneyAccessors($name, $columns['amountColumn'], $columns['currencyIdColumn']);
         }
 
         // After mutators and accessors are created we have to unset moneyFields
@@ -49,17 +51,17 @@ class MoneyFields extends ModelBehavior
      */
     public function makeMoneyMutator($name, $amountColumn, $currencyIdColumn)
     {
-        $methodName = 'set'.studly_case($name).'Attribute';
+        $methodName = 'set' . studly_case($name) . 'Attribute';
         $model = $this->model;
 
         $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
             $model->setAttribute($amountColumn, empty($value['amount'])
-                    ? 0
-                    : Helpers::removeNonNumeric($value['amount']));
+                ? 0
+                : Helpers::removeNonNumeric($value['amount']));
 
             $model->setAttribute($currencyIdColumn, empty($value['currency'])
-                    ? Currency::getPrimary()->id
-                    : Currency::findByCode($value['currency'])->id);
+                ? Currency::getPrimary()->id
+                : Currency::findByCode($value['currency'])->id);
         });
     }
 
@@ -71,15 +73,27 @@ class MoneyFields extends ModelBehavior
      * @param string $currencyIdColumn unsigned integer foreign key with the responsiv_currency.id
      * @return void
      */
-    public function makeMoneyAccessor($name, $amountColumn, $currencyIdColumn)
+    public function makeMoneyAccessors($name, $amountColumn, $currencyIdColumn)
     {
-        $methodName = 'get'.studly_case($name).'Attribute';
         $model = $this->model;
 
+        /**
+         * $model->price will return array with amount and currency like
+         * [
+         *    'amount' => 1234,
+         *    'currency' => 'USD'
+         * ]
+         *
+         * Which represents the amount of $12.34
+         * Use price_formatted or price_decimal to get it in nicer format (see below)
+         *
+         * @return array
+         */
+        $methodName = 'get' . studly_case($name) . 'Attribute';
         $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
             $value = [];
 
-            if (isset($model->attributes[$amountColumn]) && ! empty($model->attributes[$amountColumn])) {
+            if (isset($model->attributes[$amountColumn]) && !empty($model->attributes[$amountColumn])) {
                 $value['amount'] = (int) $model->getAttribute($amountColumn);
             } else {
                 $value['amount'] = 0;
@@ -93,6 +107,26 @@ class MoneyFields extends ModelBehavior
             }
 
             return $value;
+        });
+
+        /**
+         * $model->price_decimal will return string like "12.34"
+         *
+         * @return string
+         */
+        $methodName = 'get' . studly_case($name) . 'DecimalAttribute';
+        $model->addDynamicMethod($methodName, function () use ($model, $name) {
+            return Helpers::formatAmountDotBoth($model->$name);
+        });
+
+        /**
+         * $model->price_formatted will return string like "$12.34"
+         *
+         * @return string
+         */
+        $methodName = 'get' . studly_case($name) . 'FormattedAttribute';
+        $model->addDynamicMethod($methodName, function () use ($model, $name) {
+            return Helpers::formatMoneyBoth($model->$name);
         });
     }
 }
