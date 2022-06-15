@@ -43,12 +43,9 @@ class Helpers
     public static function formatAmountDot(int $amount, string $currencyCode): string
     {
         $currency = Currency::findByCode($currencyCode);
-
         $fractionDigits = $currency->initbiz_money_fraction_digits;
-
         $dotAmount = $amount / pow(10, $fractionDigits);
-
-        return (string) $dotAmount;
+        return number_format($dotAmount, $fractionDigits, ".", "");
     }
 
     /**
@@ -87,5 +84,21 @@ class Helpers
         }
 
         return self::formatAmountDot($params['amount'], $params['currency']);
+    }
+
+    /**
+     * Get amount in integer from dot format
+     * e.g. $12 will return 1200, $12.5 -> 1250, $12.34 -> 1234
+     *
+     * @param float $amount
+     * @param string $currencyCode
+     * @return integer
+     */
+    public static function intFromFloat(float $amount, string $currencyCode): int
+    {
+        $currency = Currency::findByCode($currencyCode);
+        $fractionDigits = $currency->initbiz_money_fraction_digits;
+        $intAmount = $amount * pow(10, $fractionDigits);
+        return (int) $intAmount;
     }
 }

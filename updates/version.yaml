@@ -21,3 +21,5 @@
     - 'Code cleanup'
 1.0.11:
     - 'Small fix & new accessors types: price_decimal and price_formatted'
+1.0.12:
+    - 'Add int from float helper'
