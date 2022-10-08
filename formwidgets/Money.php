@@ -125,7 +125,7 @@ class Money extends FormWidgetBase
     {
         $this->addCss(['~/plugins/initbiz/money/formwidgets/money/assets/css/money.css']);
         $this->addJs([
-            '~/plugins/initbiz/money/assets/js/node_modules/dinero.js/build/umd/dinero.min.js',
+            '~/plugins/initbiz/money/assets/node_modules/dinero.js/build/umd/dinero.min.js',
             '~/plugins/initbiz/money/assets/js/money-helpers.js',
             '~/plugins/initbiz/money/assets/js/money-manipulator.js',
             '~/plugins/initbiz/money/formwidgets/money/assets/js/config-manager.js',
