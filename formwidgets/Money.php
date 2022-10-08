@@ -23,6 +23,11 @@ class Money extends FormWidgetBase
     public $mode = 'amountcurrency';
 
     /**
+     * @var string mode that the widget will use to save and get value (array|json)
+     */
+    public $valueMode = 'array';
+
+    /**
      * {@inheritDoc}
      */
     public $defaultAlias = 'money';
@@ -35,6 +40,7 @@ class Money extends FormWidgetBase
         $this->fillFromConfig([
             'format',
             'mode',
+            'valueMode',
         ]);
     }
 
@@ -57,6 +63,9 @@ class Money extends FormWidgetBase
         $currency = $primaryCurrency;
 
         $value = $this->getLoadValue();
+        if ($this->valueMode === 'json') {
+            $value = json_decode($value, true);
+        }
 
         if ($value) {
             $amount = $value['amount'];
@@ -101,6 +110,11 @@ class Money extends FormWidgetBase
         }
 
         $value['amount'] = (int) Helpers::removeNonNumeric($value['amount']);
+
+        if ($this->valueMode === 'json') {
+            $value = json_encode($value);
+        }
+
         return $value;
     }
 
@@ -111,7 +125,7 @@ class Money extends FormWidgetBase
     {
         $this->addCss(['~/plugins/initbiz/money/formwidgets/money/assets/css/money.css']);
         $this->addJs([
-            '~/plugins/initbiz/money/assets/js/libs/dinero.js/src/dinero.min.js',
+            '~/plugins/initbiz/money/assets/js/node_modules/dinero.js/build/umd/dinero.min.js',
             '~/plugins/initbiz/money/assets/js/money-helpers.js',
             '~/plugins/initbiz/money/assets/js/money-manipulator.js',
             '~/plugins/initbiz/money/formwidgets/money/assets/js/config-manager.js',
