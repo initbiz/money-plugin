@@ -50,6 +50,10 @@ class Plugin extends PluginBase
             return null;
         }
 
+        if (is_string($value)) {
+            $value = json_decode($value, true);
+        }
+
         return Helpers::formatMoney($value['amount'], $value['currency']);
     }
 
