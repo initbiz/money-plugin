@@ -1,0 +1,9 @@
+!assets/node_modules
+assets/node_modules/*
+!assets/node_modules/dinero.js
+assets/node_modules/dinero.js/*
+!assets/node_modules/dinero.js/build
+assets/node_modules/dinero.js/build/*
+!assets/node_modules/dinero.js/build/umd
+assets/node_modules/dinero.js/build/umd/*
+!assets/node_modules/dinero.js/build/umd/dinero.min.js
