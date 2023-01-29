@@ -43,7 +43,7 @@ class Helpers
     public static function formatAmountDot(int $amount, string $currencyCode): string
     {
         $currency = Currency::findByCode($currencyCode);
-        $fractionDigits = $currency->initbiz_money_fraction_digits;
+        $fractionDigits = (int) ($currency->initbiz_money_fraction_digits ?? 2);
         $dotAmount = $amount / pow(10, $fractionDigits);
         return number_format($dotAmount, $fractionDigits, ".", "");
     }

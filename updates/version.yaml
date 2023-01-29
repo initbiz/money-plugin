@@ -27,3 +27,5 @@
     - 'Add compatibility with october 3'
 1.2.0:
     - 'Add valueMode to Money form widget so that it can use different syntax of storing value'
+1.2.1:
+    - 'Cast number_format parameter to int'
