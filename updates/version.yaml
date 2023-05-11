@@ -29,3 +29,5 @@
     - 'Add valueMode to Money form widget so that it can use different syntax of storing value'
 1.2.1:
     - 'Cast number_format parameter to int'
+1.2.2:
+    - 'Cast formatMoney parameter to int'
