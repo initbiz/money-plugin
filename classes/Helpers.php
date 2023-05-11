@@ -64,7 +64,7 @@ class Helpers
             return '';
         }
 
-        return self::formatMoney($params['amount'], $params['currency']);
+        return self::formatMoney((int) $params['amount'], $params['currency']);
     }
 
     /**
