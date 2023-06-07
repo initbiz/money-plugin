@@ -31,3 +31,5 @@
     - 'Cast number_format parameter to int'
 1.2.2:
     - 'Cast formatMoney parameter to int'
+1.2.4:
+    - 'Fix adding dinero.js'
