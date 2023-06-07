@@ -8,16 +8,16 @@ class MoneyHandler
 {
     public function subscribe($event)
     {
-        $this->addDinnero($event);
+        $this->addDinero($event);
     }
 
     /**
-     * We need to add dinnero before richeditor because for some reason when js is added after richeditor it doesn't work
+     * We need to add dinero before richeditor because for some reason when js is added after richeditor it doesn't work
      *
      * @param $event
      * @return void
      */
-    public function addDinnero($event)
+    public function addDinero($event)
     {
         Event::listen('backend.form.extendFields', function ($widget) {
             $fields = $widget->getFields();
