@@ -13,6 +13,6 @@
         "php": ">=7.2.9",
         "composer/installers": "~1.0",
         "brick/money": "^0.5.3",
-        "responsiv/currency": "^1.0.6"
+        "responsiv/currency-plugin": "^1.0.6"
     }
 }
