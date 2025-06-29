@@ -1,4 +1,8 @@
-<?php namespace Initbiz\Money\Updates;
+<?php
+
+declare(strict_types=1);
+
+namespace Initbiz\Money\Updates;
 
 use Schema;
 use October\Rain\Database\Updates\Migration;
