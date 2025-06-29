@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Initbiz\Money\Behaviors;
 
 use System\Classes\ModelBehavior;
@@ -57,7 +59,7 @@ class MoneyFields extends ModelBehavior
         $model->addDynamicMethod($methodName, function ($value) use ($model, $amountColumn, $currencyIdColumn) {
             $model->setAttribute($amountColumn, empty($value['amount'])
                 ? 0
-                : Helpers::removeNonNumeric($value['amount']));
+                : Helpers::removeNonNumeric((string) $value['amount']));
 
             $model->setAttribute($currencyIdColumn, empty($value['currency'])
                 ? Currency::getPrimary()->id
