@@ -35,3 +35,5 @@
     - 'Fix adding dinero.js'
 1.2.5:
     - 'Require currency-plugin instead of deprecated currency'
+2.0.0:
+    - 'Backend event handlers converted from jQuery to Turbo'
