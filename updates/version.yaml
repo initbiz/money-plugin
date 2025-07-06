@@ -33,3 +33,5 @@
     - 'Cast formatMoney parameter to int'
 1.2.4:
     - 'Fix adding dinero.js'
+1.2.5:
+    - 'Repair of support for october 4'
