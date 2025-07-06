@@ -1,10 +1,12 @@
-<?php namespace Initbiz\Money\FormWidgets;
+<?php
 
-use Html;
+declare(strict_types=1);
+
+namespace Initbiz\Money\FormWidgets;
+
 use Backend\Classes\FormField;
 use Initbiz\Money\Classes\Helpers;
 use Backend\Classes\FormWidgetBase;
-use RainLab\Location\Models\Setting;
 use Responsiv\Currency\Models\Currency as CurrencyModel;
 
 /**
@@ -76,10 +78,10 @@ class Money extends FormWidgetBase
             $currencyCode = $primaryCurrency->currency_code;
         }
 
-        $name = $this->formField->getName()."[amount]";
-        $currenciesFieldName = $this->formField->getName()."[currency]";
+        $name = $this->formField->getName() . "[amount]";
+        $currenciesFieldName = $this->formField->getName() . "[currency]";
 
-        $currenciesField = new FormField($currenciesFieldName, $this->label."_currency");
+        $currenciesField = new FormField($currenciesFieldName, $this->label . "_currency");
         $currenciesField->options = CurrencyModel::listEnabled();
         $currenciesField->value = $currencyCode;
         $currenciesField->attributes = $this->formField->attributes;
@@ -105,7 +107,7 @@ class Money extends FormWidgetBase
             return FormField::NO_SAVE_DATA;
         }
 
-        if(is_null($value)) {
+        if (is_null($value)) {
             return null;
         }
 

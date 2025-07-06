@@ -1,5 +1,4 @@
-(function ($) {
-    "use strict";
+addEventListener('page:loaded', function() {
     /**
      * Money form widget
      * @param {Object} domElement DOM Object with money form widget
@@ -10,11 +9,8 @@
          * @type {Object}
          */
         this.domElement = domElement;
-
         this.configManager = new $.ConfigManager(this.domElement.find($('.money-config')));
-
         this.manipulator = new $.MoneyManipulator(this.configManager.get());
-
         this.currencyInput = this.domElement.find($('.amount-input'));
     };
 
@@ -31,4 +27,4 @@
     };
 
     $.MoneyWidget = MoneyWidget;
-}(jQuery));
+})

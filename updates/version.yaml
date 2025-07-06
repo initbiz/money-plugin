@@ -34,4 +34,9 @@
 1.2.4:
     - 'Fix adding dinero.js'
 1.2.5:
+    - 'Require currency-plugin instead of deprecated currency'
+2.0.0:
+    - 'Backend event handlers converted from jQuery to Turbo'
+2.0.1:
     - 'Repair of support for october 4'
+

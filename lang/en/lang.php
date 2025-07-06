@@ -1,4 +1,8 @@
-<?php return [
+<?php
+
+declare(strict_types=1);
+
+return [
     'plugin' => [
         'name' => 'Money',
         'description' => 'Everything you need to have installed to work with money in your OctoberCMS app'
