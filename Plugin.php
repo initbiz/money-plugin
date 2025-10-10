@@ -35,7 +35,7 @@ class Plugin extends PluginBase
         return [
             Money::class => [
                 'label' => 'Money',
-                'code'  => 'money'
+                'code' => 'money'
             ]
         ];
     }
