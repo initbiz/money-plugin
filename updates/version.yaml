@@ -39,4 +39,5 @@
     - 'Backend event handlers converted from jQuery to Turbo'
 2.0.1:
     - 'Repair of support for october 4'
-
+2.0.2:
+    - 'Helper parsing floats was sometimes losing a penny'
