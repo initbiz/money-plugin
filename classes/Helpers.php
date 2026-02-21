@@ -99,6 +99,6 @@ class Helpers
         $currency = Currency::findByCode($currencyCode);
         $fractionDigits = $currency->initbiz_money_fraction_digits;
         $intAmount = $amount * pow(10, $fractionDigits);
-        return (int) $intAmount;
+        return (int) round($intAmount);
     }
 }
