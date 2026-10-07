@@ -1,43 +1,45 @@
 1.0.1:
-    - 'Initialize plugin.'
+    - "Initialize plugin."
     - update_responsive_currency_currencies_table.php
 1.0.2:
-    - 'MoneyFields behavior fixed'
+    - "MoneyFields behavior fixed"
 1.0.3:
-    - 'Small extending fix for better DX'
+    - "Small extending fix for better DX"
 1.0.4:
-    - 'Minor bug fixes'
+    - "Minor bug fixes"
 1.0.5:
-    - 'Yet another small fix'
+    - "Yet another small fix"
 1.0.6:
-    - 'Updating partials with moneyFields works'
+    - "Updating partials with moneyFields works"
 1.0.7:
-    - 'Added money column type'
+    - "Added money column type"
 1.0.8:
-    - 'Minor bug fixes, a few features added'
+    - "Minor bug fixes, a few features added"
 1.0.9:
-    - 'Fixed mutators and accessors with zero and null values'
+    - "Fixed mutators and accessors with zero and null values"
 1.0.10:
-    - 'Code cleanup'
+    - "Code cleanup"
 1.0.11:
-    - 'Small fix & new accessors types: price_decimal and price_formatted'
+    - "Small fix & new accessors types: price_decimal and price_formatted"
 1.0.12:
-    - 'Add int from float helper'
+    - "Add int from float helper"
 1.1.0:
-    - 'Add compatibility with october 3'
+    - "Add compatibility with october 3"
 1.2.0:
-    - 'Add valueMode to Money form widget so that it can use different syntax of storing value'
+    - "Add valueMode to Money form widget so that it can use different syntax of storing value"
 1.2.1:
-    - 'Cast number_format parameter to int'
+    - "Cast number_format parameter to int"
 1.2.2:
-    - 'Cast formatMoney parameter to int'
+    - "Cast formatMoney parameter to int"
 1.2.4:
-    - 'Fix adding dinero.js'
+    - "Fix adding dinero.js"
 1.2.5:
-    - 'Require currency-plugin instead of deprecated currency'
+    - "Require currency-plugin instead of deprecated currency"
 2.0.0:
-    - 'Backend event handlers converted from jQuery to Turbo'
+    - "Backend event handlers converted from jQuery to Turbo"
 2.0.1:
-    - 'Repair of support for october 4'
+    - "Repair of support for october 4"
 2.0.2:
-    - 'Helper parsing floats was sometimes losing a penny'
+    - "Helper parsing floats was sometimes losing a penny"
+2.0.3:
+    - "Update plugin documentation"
