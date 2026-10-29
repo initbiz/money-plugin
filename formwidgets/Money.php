@@ -11,6 +11,7 @@ use Responsiv\Currency\Models\Currency as CurrencyModel;
 
 /**
  * Money input
+ * @property mixed $label
  */
 class Money extends FormWidgetBase
 {
