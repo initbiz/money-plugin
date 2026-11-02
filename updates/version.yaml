@@ -43,3 +43,5 @@
     - "Helper parsing floats was sometimes losing a penny"
 2.0.3:
     - "Update plugin documentation"
+2.0.4:
+    - "Add tests, linter and Danger to GitLab CI"
