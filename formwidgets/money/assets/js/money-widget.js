@@ -1,30 +1,31 @@
-addEventListener('page:loaded', function() {
-    /**
-     * Money form widget
-     * @param {Object} domElement DOM Object with money form widget
-     */
-    var MoneyWidget = function (domElement) {
-        /**
-         * Money-widget div
-         * @type {Object}
-         */
-        this.domElement = domElement;
-        this.configManager = new $.ConfigManager(this.domElement.find($('.money-config')));
+/**
+ * Money form widget as an October disposable control (data-control="money"): connected whenever the field
+ * appears - with the page, an AJAX update, a popup, a lazy repeater item or a Turbo visit.
+ * The server renders the amount in minor units, the control shows it formatted and formats what the user types.
+ */
+oc.registerControl('money', class extends oc.ControlBase {
+    connect() {
+        this.configManager = new $.ConfigManager($('.money-config', this.element));
         this.manipulator = new $.MoneyManipulator(this.configManager.get());
-        this.currencyInput = this.domElement.find($('.amount-input'));
-    };
+        this.$input = $('.amount-input', this.element);
 
-    MoneyWidget.prototype.parseCurrencyInput = function () {
-        var value = this.currencyInput.val();
-        value = this.manipulator.parseCurrency(value);
-        this.currencyInput.val(value).trigger("change");
-    };
+        this.$input.val(this.manipulator.parseCurrencyRaw(this.$input.val())).trigger('change');
 
-    MoneyWidget.prototype.parseCurrencyInputRaw = function () {
-        var value = this.currencyInput.val();
-        value = this.manipulator.parseCurrencyRaw(value);
-        this.currencyInput.val(value).trigger("change");
-    };
+        this.$input.on('blur', this.proxy(this.onBlur));
+        this.$input.on('focus', this.proxy(this.onFocus));
+    }
 
-    $.MoneyWidget = MoneyWidget;
-})
+    disconnect() {
+        this.$input.off('blur', this.proxy(this.onBlur));
+        this.$input.off('focus', this.proxy(this.onFocus));
+    }
+
+    onBlur() {
+        this.$input.val(this.manipulator.parseCurrency(this.$input.val())).trigger('change');
+    }
+
+    // Select the whole amount on the first click
+    onFocus() {
+        setTimeout(() => this.$input.select(), 50);
+    }
+});

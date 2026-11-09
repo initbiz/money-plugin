@@ -24,7 +24,6 @@ class Plugin extends PluginBase
     public function boot()
     {
         Event::subscribe(\Initbiz\Money\EventHandlers\ResponsivCurrencyHandler::class);
-        Event::subscribe(\Initbiz\Money\EventHandlers\MoneyHandler::class);
     }
 
     /**
