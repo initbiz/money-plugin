@@ -10,4 +10,8 @@ return [
     'currency_form' => [
         'fraction_digits' => 'Number of fraction digits',
     ],
+
+    'money_fields' => [
+        'currency_not_found' => 'There is no currency with id :id.',
+    ],
 ];

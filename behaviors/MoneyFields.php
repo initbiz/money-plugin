@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Initbiz\Money\Behaviors;
 
+use Lang;
 use System\Classes\ModelBehavior;
 use Initbiz\Money\Classes\Helpers;
 use Responsiv\Currency\Models\Currency;
+use Initbiz\Money\Exceptions\CurrencyNotFoundException;
 
 /**
  * Behavior to use moneyFields property to define which fields are of type money
@@ -18,6 +20,11 @@ class MoneyFields extends ModelBehavior
     protected $requiredProperties = ['moneyFields'];
 
     protected $model;
+
+    /**
+     * @var array Currency codes by currency id
+     */
+    protected static $currencyCodesCache = [];
 
     public function __construct($model)
     {
@@ -102,8 +109,8 @@ class MoneyFields extends ModelBehavior
             }
 
             if (isset($model->$currencyIdColumn)) {
-                $currencyId = $model->getAttribute($currencyIdColumn);
-                $value['currency'] = Currency::find($currencyId)->currency_code;
+                $currencyId = (int) $model->getAttribute($currencyIdColumn);
+                $value['currency'] = $this->getCurrencyCodeById($currencyId);
             } else {
                 $value['currency'] = Currency::getPrimary()->currency_code;
             }
@@ -130,5 +137,33 @@ class MoneyFields extends ModelBehavior
         $model->addDynamicMethod($methodName, function () use ($model, $name) {
             return Helpers::formatMoneyBoth($model->$name);
         });
+    }
+
+    /**
+     * The currency's code
+     *
+     * @param int $currencyId
+     * @return string
+     */
+    protected function getCurrencyCodeById(int $currencyId): string
+    {
+        // The primary one from Currency's cache, the others looked up once per request
+        $primary = Currency::getPrimary();
+        if ($primary->id === $currencyId) {
+            return $primary->currency_code;
+        }
+
+        if (isset(self::$currencyCodesCache[$currencyId])) {
+            return self::$currencyCodesCache[$currencyId];
+        }
+
+        $currency = Currency::find($currencyId);
+        if (!$currency) {
+            throw new CurrencyNotFoundException(Lang::get('initbiz.money::lang.money_fields.currency_not_found', ['id' => $currencyId]));
+        }
+
+        self::$currencyCodesCache[$currencyId] = $currency->currency_code;
+
+        return $currency->currency_code;
     }
 }
